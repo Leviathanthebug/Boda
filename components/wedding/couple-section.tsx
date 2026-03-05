@@ -45,6 +45,13 @@ export function CoupleSection() {
             </p>
           </div>
         </div>
+
+        {/* Additional text section */}
+        <div className="mt-30 text-center">
+          <p style={{ fontWeight: 'bold' }} className="text-lg font-light leading-relaxed text-muted-foreground">
+            ¨Donde hay amor, comienza la eternidad..Acompañanos a celebrarlo.¨
+          </p>
+        </div>
       </div>
     </section>
   )

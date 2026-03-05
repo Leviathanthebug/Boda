@@ -1,33 +1,39 @@
-"use client"
+"use client";
 
-import { useState, useRef, type FormEvent } from "react"
-import { Heart, Send, CheckCircle2 } from "lucide-react"
-import emailjs from '@emailjs/browser';
+import { useState, useRef, type FormEvent } from "react";
+import { Heart, Send, CheckCircle2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export function RsvpSection() {
-  const [submitted, setSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const form = useRef<HTMLFormElement>(null)
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const form = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
 
     try {
+      // Enviar usando EmailJS
       await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "service_0n6k1eb",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "template_tzm3ptx",
         form.current as HTMLFormElement,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? ''  
-      )
-      setSubmitted(true)
-    } catch (error) {
-      console.error('Error sending email:', error)
-      // You can add user-facing error handling here if needed
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "cpb79TNJDD46hxXUd"
+      );
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Error sending email:", err);
+      setError("Hubo un problema al enviar tu confirmación. Por favor intenta nuevamente.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
+
+  // Si ya se envió, mostramos mensaje de agradecimiento
+  if (submitted) {
     return (
       <section id="rsvp" className="bg-foreground px-4 py-20">
         <div className="mx-auto flex max-w-md flex-col items-center text-center">
@@ -36,16 +42,26 @@ export function RsvpSection() {
             Gracias por confirmar
           </h2>
           <p className="text-sm font-light text-gold-light">
-            Hemos recibido tu confirmacion. Estamos emocionados de compartir este dia tan
+            Hemos recibido tu confirmación. Estamos emocionados de compartir este día tan
             especial contigo.
           </p>
         </div>
       </section>
-    )
+    );
+  }
 
+  // Formulario principal
   return (
     <section id="rsvp" className="bg-foreground px-4 py-20">
       <div className="mx-auto max-w-lg">
+        {/* Sección de texto descriptiva */}
+        <div className="mb-12 text-center">
+          <p className="text-lg font-light leading-relaxed text-gold-light">
+            Tu presencia es el regalo más preciado que podemos recibir. Nos encantaría contar
+            contigo en este día tan especial para celebrar nuestro amor.
+          </p>
+        </div>
+
         <div className="mb-10 text-center">
           <div className="mb-4 flex items-center justify-center gap-3">
             <span className="block h-px w-12 bg-gold/40" />
@@ -60,20 +76,14 @@ export function RsvpSection() {
           </p>
         </div>
 
-        {/*
-          Netlify Forms: el atributo data-netlify="true" y el hidden input
-          con name="form-name" permiten que Netlify capture los envios.
-          Configura las notificaciones por email en Netlify > Site Settings > Forms.
-        */}
+        {/* Si usas Netlify Forms, descomenta las siguientes líneas y elimina el atributo onSubmit si quieres que funcione sin JS */}
         <form
-          name="rsvp"
-          method="POST"
-          data-netlify="true"
-          onSubmit={handleSubmit}
           ref={form}
+          onSubmit={handleSubmit}
+          // data-netlify="true"  // Comentado para evitar conflicto con EmailJS
           className="flex flex-col gap-5"
         >
-          <input type="hidden" name="form-name" value="rsvp" />
+          {/* <input type="hidden" name="form-name" value="rsvp" /> */}
 
           {/* Nombre */}
           <div className="flex flex-col gap-1.5">
@@ -99,7 +109,7 @@ export function RsvpSection() {
               htmlFor="email"
               className="text-xs font-light uppercase tracking-[0.15em] text-gold-light"
             >
-              Correo electronico
+              Correo electrónico
             </label>
             <input
               type="email"
@@ -125,29 +135,43 @@ export function RsvpSection() {
               required
               className="rounded-none border border-gold/30 bg-transparent px-4 py-3 text-sm text-primary-foreground focus:border-gold focus:outline-none"
             >
-              <option value="" className="bg-foreground">Selecciona una opcion</option>
-              <option value="confirmo" className="bg-foreground">Confirmo mi asistencia</option>
-              <option value="no-asistire" className="bg-foreground">No podre asistir</option>
+              <option value="" className="bg-foreground">
+                Selecciona una opción
+              </option>
+              <option value="confirmo" className="bg-foreground">
+                Confirmo mi asistencia
+              </option>
+              <option value="no-asistire" className="bg-foreground">
+                No podré asistir
+              </option>
             </select>
           </div>
 
-          {/* Numero de acompanantes */}
+          {/* Número de acompañantes */}
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="acompanantes"
               className="text-xs font-light uppercase tracking-[0.15em] text-gold-light"
             >
-              Numero de acompanantes
+              Número de acompañantes
             </label>
             <select
               id="acompanantes"
               name="acompanantes"
               className="rounded-none border border-gold/30 bg-transparent px-4 py-3 text-sm text-primary-foreground focus:border-gold focus:outline-none"
             >
-              <option value="0" className="bg-foreground">Solo yo</option>
-              <option value="1" className="bg-foreground">1 acompanante</option>
-              <option value="2" className="bg-foreground">2 acompanantes</option>
-              <option value="3" className="bg-foreground">3 acompanantes</option>
+              <option value="0" className="bg-foreground">
+                Solo yo
+              </option>
+              <option value="1" className="bg-foreground">
+                1 acompañante
+              </option>
+              <option value="2" className="bg-foreground">
+                2 acompañantes
+              </option>
+              <option value="3" className="bg-foreground">
+                3 acompañantes
+              </option>
             </select>
           </div>
 
@@ -185,6 +209,8 @@ export function RsvpSection() {
             />
           </div>
 
+          {error && <p className="text-sm text-red-400">{error}</p>}
+
           <button
             type="submit"
             disabled={isSubmitting}
@@ -196,5 +222,5 @@ export function RsvpSection() {
         </form>
       </div>
     </section>
-  )
+  );
 }

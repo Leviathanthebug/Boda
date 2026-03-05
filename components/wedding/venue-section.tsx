@@ -1,16 +1,49 @@
-import { MapPin, Clock, Car } from "lucide-react"
+import { MapPin, Clock, Car, CalendarDays } from "lucide-react"
 
 export function VenueSection() {
   return (
     <section id="lugar" className="bg-background px-4 py-20">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-12 text-center">
-          <h2 className="mb-2 font-serif text-3xl font-bold text-foreground md:text-4xl">
-            Lugar de la Celebracion
-          </h2>
-          <p className="text-sm font-light text-muted-foreground">
-            Donde sellamos nuestro amor rodeados de las personas que mas queremos.
-          </p>
+        {/* Section heading */}
+        <div className="mb-12 grid gap-8 md:grid-cols-3">
+          <div className="flex flex-col items-center rounded-xl bg-card p-8 shadow-sm">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream">
+              <CalendarDays className="h-6 w-6 text-gold" />
+            </div>
+            <h3 className="mt-4 font-serif text-xl font-semibold text-foreground">
+              Fecha
+            </h3>
+            <p className="mt-2 text-muted-foreground">
+              Viernes, 20 de Marzo de 2026
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center rounded-xl bg-card p-8 shadow-sm">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream">
+              <Clock className="h-6 w-6 text-gold" />
+            </div>
+            <h3 className="mt-4 font-serif text-xl font-semibold text-foreground">
+              Hora
+            </h3>
+            <p className="mt-2 text-muted-foreground">
+              Cena: 6:00 PM
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center rounded-xl bg-card p-8 shadow-sm">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream">
+              <MapPin className="h-6 w-6 text-gold" />
+            </div>
+            <h3 className="mt-4 font-serif text-xl font-semibold text-foreground">
+              Lugar
+            </h3>
+            <p className="mt-2 text-muted-foreground">
+              Salón de Eventos TM
+            </p>
+            <p className="text-muted-foreground">
+              Tocoa, Colón
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-col gap-8 md:flex-row">
