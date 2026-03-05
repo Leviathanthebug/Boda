@@ -76,6 +76,14 @@ export function RsvpSection() {
           </p>
         </div>
 
+        {/* Nueva sección de texto */}
+        <div className="mb-8 text-center">
+          <p style={{ fontWeight: 'bold' }} className="text-base font-light leading-relaxed text-gold-light">
+           El mejor regalo de nuestra boda, es la alegría y el honor de compartir con ustedes este día tan especial, si su deseo es hacernos un regalo, en efectivo lo sabremos apreciar.
+
+          </p>
+        </div>
+
         {/* Si usas Netlify Forms, descomenta las siguientes líneas y elimina el atributo onSubmit si quieres que funcione sin JS */}
         <form
           ref={form}
