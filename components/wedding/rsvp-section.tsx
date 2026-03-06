@@ -54,11 +54,12 @@ export function RsvpSection() {
   return (
     <section id="rsvp" className="bg-foreground px-4 py-20">
       <div className="mx-auto max-w-lg">
-        {/* Sección de texto descriptiva */}
-        <div className="mb-12 text-center">
-          <p className="text-lg font-light leading-relaxed text-gold-light">
-            Tu presencia es el regalo más preciado que podemos recibir. Nos encantaría contar
-            contigo en este día tan especial para celebrar nuestro amor.
+
+        {/* Nueva sección de texto */}
+        <div className="mb-8 text-center">
+          <p style={{ fontWeight: 'bold' }} className="text-base font-light leading-relaxed text-gold-light">
+           El mejor regalo de nuestra boda, es la alegría y el honor de compartir con ustedes este día tan especial, si su deseo es hacernos un regalo, en efectivo lo sabremos apreciar.
+
           </p>
         </div>
 
@@ -73,14 +74,6 @@ export function RsvpSection() {
           </h2>
           <p className="text-sm font-light text-gold-light">
             Por favor confirma antes del 15 de marzo, 2026
-          </p>
-        </div>
-
-        {/* Nueva sección de texto */}
-        <div className="mb-8 text-center">
-          <p style={{ fontWeight: 'bold' }} className="text-base font-light leading-relaxed text-gold-light">
-           El mejor regalo de nuestra boda, es la alegría y el honor de compartir con ustedes este día tan especial, si su deseo es hacernos un regalo, en efectivo lo sabremos apreciar.
-
           </p>
         </div>
 
