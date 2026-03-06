@@ -89,15 +89,15 @@ export function RsvpSection() {
           {/* Nombre */}
           <div className="flex flex-col gap-1.5">
             <label
-              htmlFor="nombre"
+              htmlFor="name"
               className="text-xs font-light uppercase tracking-[0.15em] text-gold-light"
             >
               Nombre completo
             </label>
             <input
               type="text"
-              id="nombre"
-              name="nombre"
+              id="name"
+              name="name"
               required
               placeholder="Tu nombre completo"
               className="rounded-none border border-gold/30 bg-transparent px-4 py-3 text-sm text-primary-foreground placeholder:text-gold/30 focus:border-gold focus:outline-none"
